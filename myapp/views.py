@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from myapp.models import User
-from myapp.forms import UserForm
+from myapp.forms import UserForm , LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -32,5 +32,19 @@ def UserRegistration(request):
 
 def UserLogin(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        form = LoginForm()
+        print(form)
+        if form.is_valid():
+            Username = form.cleaned_data.get('Username')
+            password = form.cleaned_data.get('password')
+            print(Username)
+            user = authenticate(request, Username=Username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/home')
+            else:
+                return render(request, 'login.html', {'error_message': 'Invalid email or password'})
+    else:
+        form = LoginForm()
+    return render(request, 'loginpage.html', {'form':form})
+        
