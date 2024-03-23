@@ -9,5 +9,5 @@ class UserForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    Username = forms.CharField(max_length=200)
+    Username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)

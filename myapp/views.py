@@ -32,18 +32,18 @@ def UserRegistration(request):
 
 def UserLogin(request):
     if request.method == 'POST':
-        form = LoginForm()
-        print(form)
+        form = LoginForm(request.POST)
         if form.is_valid():
-            Username = form.cleaned_data.get('Username')
-            password = form.cleaned_data.get('password')
+            Username = form.cleaned_data['Username']
+            password = form.cleaned_data['password']
             print(Username)
             user = authenticate(request, Username=Username, password=password)
+            print(user)
             if user is not None:
                 login(request, user)
                 return redirect('/home')
             else:
-                return render(request, 'login.html', {'error_message': 'Invalid email or password'})
+                return redirect('/login',{'error_message': 'Invalid email or password'})
     else:
         form = LoginForm()
     return render(request, 'loginpage.html', {'form':form})
