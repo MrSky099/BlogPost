@@ -1,50 +1,38 @@
 from django.shortcuts import render, redirect
-from myapp.models import User
-from myapp.forms import UserForm , LoginForm
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 def Home(request):
     return render(request, 'index.html')
 
-def UserRegistration(request):
-    password = request.POST.get('password')
-    password2 = request.POST.get('password2')
+def UserRegister(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            Username = form.cleaned_data['Username']
-            email = form.cleaned_data['email']
-            Phone_Number = form.cleaned_data['Phone_Number']
-            if password != password2:
-                return redirect('/register', {'msg': 'password mismatch'})
-            if User.objects.filter(Username=Username).exists():
-                return render(request, 'register.html', {'form': form, 'msg': 'Username already exists'})
-            elif User.objects.filter(email=email).exists():
-                return render(request, 'register.html', {'form': form, 'msg': 'Email already exists'})
-            elif User.objects.filter(Phone_Number = Phone_Number).exists():
-                return render(request, 'register.html', {'form': form, 'msg': 'Mobile number already registered'})
-            form.save()
-            return redirect('/home')
-    else:
-        form = UserForm()
-    return render(request, 'register.html', {'form': form})
-
-def UserLogin(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            Username = form.cleaned_data['Username']
-            password = form.cleaned_data['password']
-            print(Username)
-            user = authenticate(request, Username=Username, password=password)
-            print(user)
-            if user is not None:
-                login(request, user)
-                return redirect('/home')
-            else:
-                return redirect('/login',{'error_message': 'Invalid email or password'})
-    else:
-        form = LoginForm()
-    return render(request, 'loginpage.html', {'form':form})
-        
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+         
+        user = User.objects.filter(username=username, email=email)
+         
+        if user.exists():
+            messages.info(request, "Username already taken!")
+            return redirect('/register/')
+         
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email = email
+        )
+         
+        user.set_password(password)
+        if password == password:
+            user.save()
+    
+            messages.info(request, "Account created Successfully!")
+            return redirect('/home/')
+     
+    return render(request, 'register.html')
