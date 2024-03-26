@@ -60,8 +60,15 @@
                 <h2 class="text-center mb-4">Login</h2>
                 <form method='post' action="/login/">
                     {% csrf_token %} 
+                    {% if messages %}
+                    <div class="alert alert-primary" role="alert">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %} 
                     <div class="mb-3">
-                        <input placeholder="Username" type="Username" class="form-control" id="Username" name="Username">
+                        <input placeholder="Username" type="Username" class="form-control" id="Username" name="username">
                     </div>
                     <div class="mb-3">
                         <input placeholder="Password" type="password" class="form-control" id="password" name="password">

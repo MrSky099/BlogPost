@@ -36,3 +36,20 @@ def UserRegister(request):
             return redirect('/home/')
      
     return render(request, 'register.html')
+
+def UserLogin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'Invalid Username')
+            return redirect('/login/')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, "Invalid Password")
+            return redirect('/login/')
+        else:
+            login(request, user)
+            return redirect('/home/')
+    return render(request, 'loginpage.html')

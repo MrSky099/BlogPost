@@ -4,5 +4,5 @@ from myapp import views
 urlpatterns = [
     path('home/', views.Home, name = 'home'),
     path('register/', views.UserRegister, name = 'register'),
-    #path('login/', views.UserLogin, name = 'login')
+    path('login/', views.UserLogin, name = 'login')
 ]
