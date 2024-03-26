@@ -53,3 +53,10 @@ def UserLogin(request):
             login(request, user)
             return redirect('/home/')
     return render(request, 'loginpage.html')
+
+def UserLogout(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/home/')
+    else:
+        return redirect('/login/')
