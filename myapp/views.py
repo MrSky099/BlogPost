@@ -6,6 +6,9 @@ from django.contrib import messages
 def Home(request):
     return render(request, 'index.html')
 
+def UserProfile(request):
+    return render(request, 'profile.html')
+
 def UserRegister(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
