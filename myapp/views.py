@@ -55,8 +55,6 @@ def UserLogin(request):
     return render(request, 'loginpage.html')
 
 def UserLogout(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('/home/')
-    else:
-        return redirect('/login/')
+    #if request.method == 'POST':
+    logout(request)
+    return redirect('/home/')
