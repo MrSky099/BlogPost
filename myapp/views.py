@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import UserBlogsForm
+from .models import UserBlogs
 
 def Home(request):
     return render(request, 'index.html')
@@ -61,3 +63,16 @@ def UserLogout(request):
     #if request.method == 'POST':
     logout(request)
     return redirect('/home/')
+
+def UploadBlog(request):
+    if request.method == 'POST':
+        form = UserBlogsForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog_post = form.save(commit=False)
+            blog_post.author = request.User
+            blog_post.save()
+            messages.info(request, "Upload Blog Successfully")
+            return redirect('/blogpost/')
+    else:
+        form = UserBlogsForm()
+    return render(request, 'uploadblog.html' , {'form': form})
