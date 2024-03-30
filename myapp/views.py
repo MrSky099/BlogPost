@@ -20,12 +20,18 @@ def UserRegister(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
+
+        if not (first_name and last_name and username and email and password and password2):
+            messages.error(request, "Please fill in all fields.")
+            return render(request, 'register.html')
+        
+        if password != password2:
+            messages.error(request, "Passwords do not match.")
+            return render(request, 'register.html')
          
-        user = User.objects.filter(username=username, email=email)
-         
-        if user.exists():
-            messages.info(request, "Username already taken!")
-            return redirect('/register/')
+        if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
+            messages.error(request, "Username or email already taken.")
+            return render(request, 'register.html')
          
         user = User.objects.create_user(
             first_name=first_name,
@@ -35,11 +41,9 @@ def UserRegister(request):
         )
          
         user.set_password(password)
-        if password == password:
-            user.save()
-    
-            messages.info(request, "Account created Successfully!")
-            return redirect('/home/')
+        user.save()
+        messages.info(request, "Account created Successfully!")
+        return redirect('/home/')
      
     return render(request, 'register.html')
 

@@ -12,20 +12,22 @@
         body {
             background-color: #ffffff; /* White background */
             color: #000000; /* Black text color */
+            font-family: 'Poppins', sans-serif; /* Use Google Font 'Poppins' */
         }
 
         .form-container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
-            border: 2px solid #000000; /* Black border */
+            padding: 30px;
+            border: 2px solid #D2691E; /* Light brown border */
             border-radius: 10px;
-            background-color: #D2691E; /* Light gray background */
+            background-color: #ffffff; /* White background */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
         }
 
         .form-control {
-            background-color: #ffffff; /* White background */
-            border-color: #000000; /* Black border */
+            background-color: #f8f9fa; /* Light gray background */
+            border-color: #D2691E; /* Light brown border */
             color: #000000; /* Black text color */
         }
 
@@ -36,20 +38,35 @@
 
         .form-control:focus {
             background-color: #ffffff; /* White background */
-            border-color: #000000; /* Black border */
+            border-color: #D2691E; /* Light brown border */
             color: #000000; /* Black text color */
         }
 
         .btn-outline-light {
-            border-color: #000000; /* Black border */
-            color: #000000; /* Black text color */
+            border-color: #D2691E; /* Light brown border */
+            color: #D2691E; /* Light brown text color */
+            font-weight: bold; /* Make text bold for better visibility */
         }
 
         .btn-outline-light:hover {
-            background-color: #000000; /* Black background on hover */
+            background-color: #D2691E; /* Light brown background on hover */
             color: #ffffff; /* White text color on hover */
         }
+
+        .btn-outline-light:active {
+            background-color: #A0522D; /* Darker brown color when button is active */
+        }
+
+        .register-heading {
+            font-size: 2rem; /* Larger font size */
+            font-weight: bold; /* Bold font weight */
+            color: #D2691E; /* Light brown text color */
+            text-align: center; /* Center align the text */
+            margin-bottom: 30px; /* Add some bottom margin for spacing */
+        }
     </style>
+    <!-- Google Font - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
 </head>
 
 <body>
@@ -57,8 +74,8 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 form-container">
-                <h2 class="text-center mb-4">Register</h2>
-                <form method="post" action="/register/" enctype="multipart/form-data">
+                <h2 class="register-heading">Register</h2> <!-- Apply new class to the heading -->
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% if messages %}
                     <div class="alert alert-primary" role="alert">
@@ -68,27 +85,21 @@
                     </div>
                     {% endif %} 
                     <div class="mb-3">
-                        <!-- <label for="firstName" class="form-label">First Name</label> -->
                         <input placeholder="First Name" type="text" class="form-control" id="first_name" name="first_name">
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="lastName" class="form-label">Last Name</label> -->
                         <input placeholder="Last Name" type="text" class="form-control" id="last_name" name="last_name">
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="username" class="form-label">Username</label> -->
                         <input placeholder="Username" type="text" class="form-control" id="username" name="username">
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="email" class="form-label">Email</label> -->
                         <input placeholder="Email" type="email" class="form-control" id="email" name="email">
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="password" class="form-label">Password</label> -->
                         <input placeholder="Password" type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="confirmPassword" class="form-label">Confirm Password</label> -->
                         <input placeholder="Confirm Password" type="password" class="form-control" id="password2" name="password2">
                     </div>
                     <button type="submit" class="btn btn-outline-light w-100">Register</button>
