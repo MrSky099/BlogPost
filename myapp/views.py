@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import UserBlogsForm
+from django.contrib.auth.decorators import login_required
 from .models import UserBlogs
 
 def Home(request):
@@ -64,15 +65,20 @@ def UserLogout(request):
     logout(request)
     return redirect('/home/')
 
+@login_required
 def UploadBlog(request):
     if request.method == 'POST':
         form = UserBlogsForm(request.POST, request.FILES)
+        print('____',form)
         if form.is_valid():
             blog_post = form.save(commit=False)
-            blog_post.author = request.User
+            blog_post.author = request.user
             blog_post.save()
             messages.info(request, "Upload Blog Successfully")
-            return redirect('/blogpost/')
+            return redirect('/uploadblog/')
+        else:
+            messages.info(request, "blog is not uploading")
+            return redirect('/uploadblog/')
     else:
         form = UserBlogsForm()
     return render(request, 'uploadblog.html' , {'form': form})
