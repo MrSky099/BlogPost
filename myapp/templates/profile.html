@@ -105,32 +105,19 @@
                     <div class="profile-info">
                         <h1>{{ user.username }}</h1>
                         <p>{{ user.email }}</p>
+                        <p class="stat-label">Total Blogs Uploaded: {{ blog_count }}</p>
                         <!-- <p>Location: City, Country</p> -->
                     </div>
-                    <ul class="profile-stats">
-                        <!-- <li><span class="stat-value">100</span> <span class="stat-label">Followers</span></li>
-                        <li><span class="stat-value">50</span> <span class="stat-label">Following</span></li> -->
-                        <li><span class="stat-value">30</span> <span class="stat-label">Blogs</span></li>
-                    </ul>
                 </div>
             </div>
             <div class="col-lg-8">
                 <div class="blog-list">
-                    <div class="blog-item">
-                        <h3>Blog Title 1</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis lorem et nisi ultricies
-                            laoreet. Nulla facilisi.</p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>Blog Title 2</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis lorem et nisi ultricies
-                            laoreet. Nulla facilisi.</p>
-                    </div>
-                    <div class="blog-item">
-                        <h3>Blog Title 3</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis lorem et nisi ultricies
-                            laoreet. Nulla facilisi.</p>
-                    </div>
+                    {% for blog in blogs %}
+                        <div class="blog-item">
+                            <h3>{{ blog.title }}</h3>
+                            <p>{{ blog.content|truncatechars_html:50 }}</p>
+                        </div>
+                    {% endfor %}          
                     <!-- Add more blog items as needed -->
                 </div>
             </div>

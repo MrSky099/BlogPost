@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -9,8 +9,15 @@ from .models import UserBlogs
 def Home(request):
     return render(request, 'index.html')
 
+@login_required
 def UserProfile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    blog_count = UserBlogs.objects.filter(author=user).count()
+    return render(request, 'profile.html', {'blog_count':blog_count})
+
+def blog_detail(request,blog_id):
+    blog = get_object_or_404(UserBlogs, id = blog_id)
+    return render(request, 'blogview.html', {'blog':blog})
 
 def UserRegister(request):
     if request.method == 'POST':
