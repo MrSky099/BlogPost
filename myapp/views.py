@@ -86,3 +86,6 @@ def UploadBlog(request):
     else:
         form = UserBlogsForm()
     return render(request, 'uploadblog.html' , {'form': form})
+
+def ViewBlog(request):
+    return render(request, 'blogview.html')

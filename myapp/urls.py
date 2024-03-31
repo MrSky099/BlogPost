@@ -9,7 +9,8 @@ urlpatterns = [
     path('login/', views.UserLogin, name = 'login'),
     path('logout/', views.UserLogout, name='logout'),
     path('profile/', views.UserProfile, name='profile'),
-    path('uploadblog/', views.UploadBlog, name='uploadblog')
+    path('uploadblog/', views.UploadBlog, name='uploadblog'),
+    path('viewblog/', views.ViewBlog, name='viewblog')
 ]
 
 if settings.DEBUG:
