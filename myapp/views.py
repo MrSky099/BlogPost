@@ -10,15 +10,17 @@ def Home(request):
     return render(request, 'index.html')
 
 @login_required
-def UserProfile(request):
+def UserProfile(request, username):
     user = request.user
+    user = User.objects.get(username=username)
+    print(user)
     blogs = UserBlogs.objects.filter(author=user)
     blog_count = UserBlogs.objects.filter(author=user).count()
-    return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count})
+    return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count , 'usern':user})
 
-def ViewBlog(request,blog_id):
-    blog = UserBlogs
-    return render(request, 'blogview.html',{'blog':blog})
+def ViewBlog(request, blog_id):
+    blog = get_object_or_404(UserBlogs, id=blog_id)
+    return render(request, 'blogview.html', {'blog':blog})
 
 def UserRegister(request):
     if request.method == 'POST':

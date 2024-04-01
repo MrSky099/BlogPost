@@ -113,26 +113,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <div class="blog-title">Blog Title</div>
-                <img class="blog-image" src="https://via.placeholder.com/800x400" alt="Blog Image">
+                <div class="blog-title">{{ blog.Title }}</div>
+                <img class="blog-image" src="{{ blog.BlogImages }}" alt="Blog Image">
                 <div class="blog-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac efficitur turpis. Sed ut tellus a nunc
-                        scelerisque hendrerit id et sem. Mauris tempus felis vitae tortor porttitor, at commodo justo lobortis.
-                        Ut mattis id orci ut cursus. Nullam consequat felis ac velit auctor, ac fermentum mi malesuada. Sed nec
-                        diam sit amet purus luctus rhoncus id ac justo. Morbi id lacus non ex placerat scelerisque et non lorem.
-                        Vestibulum elementum, nulla sit amet tincidunt viverra, ex eros aliquam urna, sed efficitur felis dui
-                        eget mi. Nulla facilisi. Integer nec elit id purus eleifend ultricies vel at arcu.</p>
-                    <p>Morbi et metus sit amet eros varius facilisis. Curabitur pretium sit amet nisi et malesuada. In vulputate,
-                        eros sit amet elementum efficitur, metus sem eleifend nulla, at rutrum dolor risus eget ligula. Aenean
-                        id dictum dui. Donec euismod est justo, et vulputate lacus mattis vel. In hac habitasse platea dictumst.
-                        Aenean sit amet magna a ex malesuada suscipit. In hac habitasse platea dictumst. Sed nec nulla sit amet
-                        orci tincidunt congue eget et quam. Fusce aliquam purus ut nunc dictum hendrerit.</p>
-                    <p>Quisque consectetur risus non nunc porttitor, sed posuere enim vehicula. Sed sagittis, nisi in rhoncus
-                        ultricies, metus nisi pharetra est, vitae gravida est mi id justo. Vivamus rutrum sapien vitae risus
-                        vestibulum, eget bibendum lacus fermentum. Sed ac pharetra ex. Integer nec nisl non sem tincidunt
-                        malesuada. Pellentesque placerat euismod mauris a auctor. Praesent id convallis sem. Proin fermentum
-                        nisl ac mauris dignissim, eget aliquam neque fermentum. Duis maximus orci et lectus tincidunt volutpat.
-                        Ut et mi ut quam sodales aliquet id at augue.</p>
+                    <p>{{ blog.BlogContent }}</p>
                 </div>
             </div>
         </div>
