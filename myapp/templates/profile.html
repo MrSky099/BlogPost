@@ -76,6 +76,10 @@
         .blog-list {
             padding: 20px;
         }
+        
+        a {
+            text-decoration: none;
+        }
 
         .blog-list .blog-item {
             background-color: #ffffff; /* White background */
@@ -113,11 +117,13 @@
             <div class="col-lg-8">
                 <div class="blog-list">
                     {% for blog in blogs %}
-                        <div class="blog-item">
-                            <h3>{{ blog.title }}</h3>
-                            <p>{{ blog.content|truncatechars_html:50 }}</p>
-                        </div>
-                    {% endfor %}          
+                        <a href="viewblog/<int=blog_id>">
+                            <div class="blog-item" >
+                                <h3>{{ blog.Title }}</h3>
+                                <p>{{ blog.BlogContent|truncatechars_html:200 }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}     
                     <!-- Add more blog items as needed -->
                 </div>
             </div>

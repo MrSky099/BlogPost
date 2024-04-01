@@ -12,12 +12,13 @@ def Home(request):
 @login_required
 def UserProfile(request):
     user = request.user
+    blogs = UserBlogs.objects.filter(author=user)
     blog_count = UserBlogs.objects.filter(author=user).count()
-    return render(request, 'profile.html', {'blog_count':blog_count})
+    return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count})
 
-def blog_detail(request,blog_id):
-    blog = get_object_or_404(UserBlogs, id = blog_id)
-    return render(request, 'blogview.html', {'blog':blog})
+def ViewBlog(request,blog_id):
+    blog = UserBlogs
+    return render(request, 'blogview.html',{'blog':blog})
 
 def UserRegister(request):
     if request.method == 'POST':
@@ -80,7 +81,6 @@ def UserLogout(request):
 def UploadBlog(request):
     if request.method == 'POST':
         form = UserBlogsForm(request.POST, request.FILES)
-        print('____',form)
         if form.is_valid():
             blog_post = form.save(commit=False)
             blog_post.author = request.user
@@ -94,5 +94,3 @@ def UploadBlog(request):
         form = UserBlogsForm()
     return render(request, 'uploadblog.html' , {'form': form})
 
-def ViewBlog(request):
-    return render(request, 'blogview.html')
