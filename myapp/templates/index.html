@@ -69,7 +69,7 @@
                         <a class="nav-link" href="{% url 'uploadblog' %}">Start Blogging</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<str:username>/">Welcome, {{ user.username }}!</a>
+                            <a class="nav-link" href="{% url 'profile' username=user.username %}">Welcome, {{ user.username }}!</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

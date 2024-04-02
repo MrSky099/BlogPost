@@ -16,7 +16,7 @@ def UserProfile(request, username):
     print(user)
     blogs = UserBlogs.objects.filter(author=user)
     blog_count = UserBlogs.objects.filter(author=user).count()
-    return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count , 'usern':user})
+    return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count , 'user':user})
 
 def ViewBlog(request, blog_id):
     blog = get_object_or_404(UserBlogs, id=blog_id)
