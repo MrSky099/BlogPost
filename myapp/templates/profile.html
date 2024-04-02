@@ -117,7 +117,7 @@
             <div class="col-lg-8">
                 <div class="blog-list">
                     {% for blog in blogs %}
-                        <a href="viewblog/<int:blog_id>/">
+                        <a href="{% url 'viewblog' blog_id=blog.blog_id %}">
                             <div class="blog-item" >
                                 <h3>{{ blog.Title }}</h3>
                                 <p>{{ blog.BlogContent|truncatechars_html:200 }}</p>

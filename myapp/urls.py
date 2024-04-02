@@ -8,9 +8,10 @@ urlpatterns = [
     path('register/', views.UserRegister, name = 'register'),
     path('login/', views.UserLogin, name = 'login'),
     path('logout/', views.UserLogout, name='logout'),
-    path('<str:username>/', views.UserProfile, name='profile'),
     path('uploadblog/', views.UploadBlog, name='uploadblog'),
     path('viewblog/<int:blog_id>/', views.ViewBlog, name='viewblog'),
+    path('<str:username>/', views.UserProfile, name='profile'),
+    
 ]
 
 if settings.DEBUG:

@@ -12,14 +12,13 @@ def Home(request):
 @login_required
 def UserProfile(request, username):
     user = request.user
-    user = User.objects.get(username=username)
-    print(user)
+    user = get_object_or_404(User, username=username)
     blogs = UserBlogs.objects.filter(author=user)
     blog_count = UserBlogs.objects.filter(author=user).count()
     return render(request, 'profile.html', {'blogs':blogs ,'blog_count':blog_count , 'user':user})
 
 def ViewBlog(request, blog_id):
-    blog = get_object_or_404(UserBlogs, id=blog_id)
+    blog = get_object_or_404(UserBlogs, blog_id=blog_id)
     return render(request, 'blogview.html', {'blog':blog})
 
 def UserRegister(request):
