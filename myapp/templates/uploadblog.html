@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,30 +9,30 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z5GHE5sgfroFv5Ehq2MW+rMkP0Uked5I3ZPnU/"
         crossorigin="anonymous">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif; /* Use Google Font 'Poppins' */
-            background-color: #ffffff; /* White background */
-            color: #000000; /* Black text color */
+        /* body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
 
-        .upload-form {
-            background-color: #ffffff; /* White background */
-            border: 2px solid #D2691E; /* Light brown border */
-            border-radius: 20px;
+        } */
+
+        /* .upload-form {
+            background-color: #ffffff;
+            border-radius: 2px;
             padding: 40px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 5000px;
             width: 100%;
-        }
+        } */
 
         .upload-form h2 {
-            color: #D2691E; /* Light brown text color */
+            color: #D2691E;
             text-align: center;
             margin-bottom: 30px;
         }
@@ -44,18 +42,20 @@
         }
 
         .form-control {
-            background-color: #f8f9fa; /* Light gray background */
-            color: #000000; /* Black text color */
+            background-color: #f8f9fa;
+            color: #000000;
             border: none;
-            border-radius: 10px;
+            border-radius: 0px;
             padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
             transition: all 0.3s ease;
+            resize: none;
+            overflow: hidden;
         }
 
         .form-control:focus {
             outline: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
         }
 
         .btn-primary {
@@ -70,9 +70,20 @@
         .btn-primary:hover {
             background-color: #A0522D; /* Darker brown background on hover */
         }
+
+
+        .profile-btn {
+            padding: 14px 25px;  /* Adjust margin as needed */
+        }
+
+
+
+        #BlogContent, #Title, #BlogImages {
+            width: calc(100% - 30px); /* Adjust the width as needed */
+            margin: 0 auto; /* Center the elements */
+        }
     </style>
 </head>
-
 <body>
     <div class="upload-form">
         <h2>Upload Blog</h2>
@@ -93,11 +104,12 @@
                 <input type="file" class="form-control" id="BlogImages" name="BlogImages" required>
             </div>
             <div class="form-group">
-                <textarea class="form-control" id="BlogContent" name="BlogContent" rows="5" placeholder="Enter blog description" required></textarea>
+                <textarea class="form-control form-control-lg" id="BlogContent" name="BlogContent" rows="25" placeholder="Enter blog content" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
+            <a class="btn btn-primary profile-btn" href="{% url 'profile' username=user.username %}">Profile</a>
+
         </form>
     </div>
 </body>
-
 </html>
